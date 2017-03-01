@@ -1,5 +1,5 @@
 dat <- read.csv("data.csv")  
-dat2 <- read.csv("C:\\Users\\Mahin\\Downloads\\data2.csv")  
+# dat2 <- read.csv("C:\\Users\\Mahin\\Downloads\\data2.csv")  
 PID <- dat$PID
 
 

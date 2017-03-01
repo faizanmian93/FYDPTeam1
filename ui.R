@@ -5,7 +5,7 @@ library(shinythemes)
 require(quantmod)
 require(rCharts)
 require(latticeExtra)
-require(Lahman) ; require(plyr); library(ascii); library(shiny); library(ggplot2)
+
 
 ui <- fluidPage( theme=shinytheme("slate"),
                  
