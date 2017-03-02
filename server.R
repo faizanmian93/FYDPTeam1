@@ -1,10 +1,18 @@
 dat <- read.csv("data.csv")  
 # dat2 <- read.csv("C:\\Users\\Mahin\\Downloads\\data2.csv")  
 PID <- dat$PID
-
+Nikidat <- read.csv("Nikidata.csv")
 
 medhaData <- read.csv("heatmaps.csv")
 mydf <- data.frame(medhaData)
+
+PID <- Nikidat$PID
+PID2 <- Nikidat$PID2
+PID3 <- Nikidat$PID3
+PID4 <- Nikidat$PID4
+Kills2 <- Nikidat$Kills2
+Deaths2 <- Nikidat$Deaths2
+Assists2 <- Nikidat$Assists2
 
 server = function(input, output){
   
@@ -125,13 +133,41 @@ server = function(input, output){
   #predictive
   
   output$PredictiveChart <- renderChart2({
+    chartData <- Nikidat[input$selection]
+    chartData2 <- Nikidat["Kills2"]
+    chartData3 <- Nikidat["Deaths2"]
+    chartData4 <- Nikidat["Assists2"]
+    chartTitle <- paste("Predicting Performance based on Time Played ")
+    
+    if (input$selection =="Kills"){
     h1 <- Highcharts$new()
     h1$chart(type = "spline")
-    h1$series(data = c(1, 3, 2, 4, 5, 4, 6, 2, 3, 5, NA), dashStyle = "longdash")
-    h1$series(data = c(NA, 4, 1, 3, 4, 2, 9, 1, 2, 3, 4), dashStyle = "shortdot")
+    h1$series(data = chartData [[1]], dashStyle = "longdash")
+    h1$series(data = chartData2 [[1]], dashStyle = "shortdot")
     h1$legend(symbolWidth = 80)
     return(h1)
+    }
+    
+    if (input$selection =="Deaths"){
+      h1 <- Highcharts$new()
+      h1$chart(type = "spline")
+      h1$series(data = chartData [[1]], dashStyle = "longdash")
+      h1$series(data = chartData3 [[1]], dashStyle = "shortdot")
+      h1$legend(symbolWidth = 80)
+      return(h1)
+    }
+    
+    if (input$selection =="Assists"){
+      h1 <- Highcharts$new()
+      h1$chart(type = "spline")
+      h1$series(data = chartData [[1]], dashStyle = "longdash")
+      h1$series(data = chartData4 [[1]], dashStyle = "shortdot")
+      h1$legend(symbolWidth = 80)
+      return(h1)
+    }
   } )
+  
+  #relative
   
   output$RelativePlot1 <-renderChart2({  
     
